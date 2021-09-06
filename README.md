@@ -1,0 +1,2 @@
+# panpizza-client
+Praca dyplomowa
