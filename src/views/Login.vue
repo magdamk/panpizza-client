@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!this.$store.getters.isLoggedIn">
     <h1>Login</h1>
     <input type="text" placeholder="Email" v-model="email" />
     <input type="text" placeholder="Password" v-model="password" />
@@ -27,8 +27,8 @@ export default {
         const response = await AuthService.login(credentials);
         this.msg = response.msg;
         const token = response.token;
-        const user = response.user;
-        this.$store.dispatch('login', { token, user });
+        const email = response.email;
+        this.$store.dispatch('login', { token, email });
         this.$router.push('/');
       } catch (error) {
         this.msg = error.response.data.msg;

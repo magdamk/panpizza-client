@@ -1,17 +1,16 @@
 <template>
-  <div class="home">
+  <div>
     <h1>Hi {{ email }}</h1>
-    <p>{{ secretMessage }}</p>
-   
+    
+    <input type="button" value="Logout" @click="logout" />
   </div>
 </template>
-
 <script>
 import AuthService from '@/services/AuthService.js';
 export default {
   data() {
     return {
-      secretMessage: '',
+  //    secretMessage: '',
       email: ''
     };
   },
@@ -20,7 +19,7 @@ export default {
       this.$router.push('/login');
     }
     this.email = this.$store.getters.getUser;
-    this.secretMessage = await AuthService.getSecretContent();
+  //  this.secretMessage = await AuthService.getSecretContent();
   },
   methods: {
     logout() {

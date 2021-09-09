@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!this.$store.getters.isLoggedIn">
     <h1>Sign Up</h1>
     <input type="text" placeholder="Email" v-model="email" />
     <input type="text" placeholder="Password" v-model="password" />
