@@ -1,7 +1,12 @@
 <template>
   <div>
-    <h1>Hi {{ email }}</h1>
-
+    <h1>{{ email }}</h1>
+    <h2>My data</h2>
+    <p>First Name: {{}} Last Name: {{}}</p>
+    <h4>Adress:</h4>
+    <p>Street: {{}} House: {{}} Flat: {{}}</p>
+    <p>City: {{}} Zip: {{}} </p>
+    <p>Phone: {{}} </p>
     <input type="button" value="Logout" @click="logout" />
   </div>
 </template>
@@ -11,7 +16,15 @@ export default {
   data() {
     return {
   //    secretMessage: '',
-      email: ''
+      email: '',
+      first_name: '',
+      last_name: '',
+      street: '',
+      house: '',
+      flat: '',
+      city: '',
+      zip: '',
+      phone: ''
     };
   },
   async created() {
@@ -24,7 +37,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout');
-      this.$router.push('/login');
+      this.$router.push('/home');
     }
   }
 };

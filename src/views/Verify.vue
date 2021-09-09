@@ -22,7 +22,6 @@ export default {
     async verify(){
     try {
         const credentials = this.$route.params.userID+'/'+this.$route.params.token;
-        console.log('credentials',credentials);
         const response = await AuthService.verify(credentials);
         this.msg = response.msg;
       } catch (error) {
