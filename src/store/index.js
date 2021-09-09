@@ -6,7 +6,7 @@ const getDefaultState = () => {
     return {
         token: '',
         email: {},
-        role: {}
+        role: 'user'
     };
 };
 
@@ -21,7 +21,7 @@ export default createStore({
         getUser: state => {
             return state.email;
         },
-        gerRole: state => {
+        getRole: state => {
             return state.role
         }
     },

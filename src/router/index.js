@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
+import Verify from "../views/Verify.vue";
 
 const routes = [{
         path: '/',
@@ -32,6 +33,11 @@ const routes = [{
         path: "/logout",
         name: "logout",
         component: Logout
+    },
+    {
+        path: "/verify/:userID/:token",
+        name: "verify",
+        component: Verify
     }
 ]
 
