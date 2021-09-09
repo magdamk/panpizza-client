@@ -1,8 +1,10 @@
 <template>
   <div class="home">
+    <div v-if="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }}</h1>
-    <p>{{ secretMessage }}</p>
-   
+    <p>{{ secretMessage }} Server level</p>
+    <p v-if="role='admin'">Visible only for admins. Vue level.</p>
+   </div>
   </div>
 </template>
 
@@ -12,13 +14,12 @@ export default {
   data() {
     return {
       secretMessage: '',
-      email: ''
+      email: '',
+      role: ''
     };
   },
   async created() {
-    if (!this.$store.getters.isLoggedIn) {
-      this.$router.push('/login');
-    }
+    this.role = this.$store.getters.getRole;
     this.email = this.$store.getters.getUser;
     this.secretMessage = await AuthService.getSecretContent();
   },
