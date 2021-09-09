@@ -1,9 +1,11 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/sign-up">SignUp</router-link> |
-    <router-link to="/login">Login</router-link>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">|About</router-link> 
+    <router-link v-if="!this.$store.getters.isLoggedIn" to="/sign-up">|SignUp</router-link>
+    <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">|Login</router-link>
+    <router-link v-if="this.$store.getters.isLoggedIn" to="/logout">|Logout</router-link>
+
   </div>
   <router-view/>
 </template>
