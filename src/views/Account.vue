@@ -48,7 +48,7 @@
     <h4>Name</h4>
     <p>{{first_name + ' ' + last_name}} </p>
     <h4>Adress:</h4>
-    <p>{{street}} {{house}} / {{flat}}</p>
+    <p>{{street}} {{house}} <span v-if="flat">/ {{flat}}</span></p>
     <p> {{zip}} {{city}} </p>
     <p>Phone: {{phone}} </p>
     <input type="button" value="Edit" @click="edit" />
