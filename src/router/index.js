@@ -5,11 +5,23 @@ import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Verify from "../views/Verify.vue";
 import Account from "../views/Account.vue";
+import EditForm from "../views/EditForm.vue"
+import AddMenuItem from "../views/AddMenuItem.vue"
 
 const routes = [{
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/edit/:itemID',
+        name: 'EditForm',
+        component: EditForm
+    },
+    {
+        path: '/add',
+        name: 'AddMenuItem',
+        component: AddMenuItem
     },
     {
         path: '/about',

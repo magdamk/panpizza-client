@@ -2,6 +2,12 @@
   <div class="home">
     <h1>Welcome to PAN*PIZZA</h1>
     <h2>Menu</h2>
+
+     <div v-if="role==='admin'"><input type="button" value="Add menu item" @click="add()" />
+    
+      <br/><br/>
+      </div>
+    <h3>PIZZA</h3>
     <div v-for="(item,index) in menu" :key="item._id"> <b>{{item.name}}</b>
         <br/>
         <br/>
@@ -10,8 +16,14 @@
         {{item.description}} 
         <br/>
         Price: {{item.price}} PLN
+        <div v-if="role==='admin'"><input type="button" value="Edit" @click="edit(item._id)" />
+         
+ 
+        </div>
         <br/><br/><br/>
     </div>
+    <h3>NAPOJE</h3>
+    <p>w przygotowaniu</p>
     <div v-if="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }} {{ role }}</h1>
     <p v-if="secretMessage">{{ secretMessage }} Server level</p>
@@ -31,6 +43,14 @@ export default {
       secretMessage: '',
       email: '',
       role: '',
+      showAddForm: false,
+      name: '',
+      description: '',
+      photo: '',
+      price: 0,
+      type: '',
+      position: null,
+      available: false
     };
   },
   async created() {
@@ -44,16 +64,16 @@ export default {
     async getMenu(){
       this.menu = await MenuService.getAllItems();
       this.menu=this.menu.menu;
+      this.menu.forEach(element => {element.showEditForm = false     
+      });
     },
-    logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
+    
+    edit(id){
+      this.$router.push('/edit/'+id);
     },
-     photoURL (item) {
-      return  "@/assets/img/"+item.photo;
-      // The path could be '../assets/img.png', etc., which depends on where your vue file is
+    add() {
+     this.$router.push('/add');
     }
-
   },
   
    
