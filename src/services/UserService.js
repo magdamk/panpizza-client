@@ -6,6 +6,6 @@ export default {
         return axios.get(url + 'user/' + params).then(response => response.data);
     },
     updateUserData(email, params) {
-        return axios.post(url + 'user/' + email, params).then(response => response.data)
+        return axios.patch(url + 'user/' + email, params).then(response => response.data)
     }
 };
