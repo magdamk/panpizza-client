@@ -3,7 +3,7 @@
     <h1>Welocme to PAN*PIZZA</h1>
     <div v-if="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }} {{ role }}</h1>
-    <p>{{ secretMessage }} Server level</p>
+    <p v-if="secretMessage">{{ secretMessage }} Server level</p>
     <p v-if="role==='admin'">Visible only for admins. Vue level.</p>
    </div>
   </div>

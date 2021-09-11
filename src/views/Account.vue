@@ -110,7 +110,6 @@ export default {
         if (this.zip != this.userData.zip) params.zip = this.zip;
         if (this.city != this.userData.city) params.city = this.city;
         if (this.phone != this.userData.phone) params.phone = this.phone;
-        console.log(params);
         this.message = await UserService.updateUserData(this.email,params);
         this.edit(); 
     },
