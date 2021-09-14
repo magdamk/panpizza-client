@@ -34,7 +34,7 @@
       <div >
       <div>
          <label for="phone">Phone</label>
-        <input type="number" id="phone" v-model.number="phone" min="0"/>
+        <input type="tel" id="phone" v-model.number="phone" min="0"/>
       </div>
       </div>
         <div>

@@ -8,7 +8,7 @@
       <br/><br/>
       </div>
     <h3>PIZZA</h3>
-    <div v-for="(item,index) in menu" :key="item._id"> <b>{{item.name}}</b>
+    <div v-for="(item,index) in menu.pizza" :key="item._id"> <b>{{item.name}}</b>
         <br/>
         <br/>
         <img v-bind:alt="`photo of pizza ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
@@ -24,6 +24,20 @@
     </div>
     <h3>NAPOJE</h3>
     <p>w przygotowaniu</p>
+    <div v-for="(item,index) in menu.drink" :key="item._id"> <b>{{item.name}}</b>
+        <br/>
+        <br/>
+        <img v-bind:alt="`photo of drink ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
+        <br/>
+        {{item.description}} 
+        <br/>
+        Price: {{item.price}} PLN
+        <div v-if="role==='admin'"><input type="button" value="Edit" @click="edit(item._id)" />
+         
+ 
+        </div>
+        <br/><br/><br/>
+    </div>
     <div v-if="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }} {{ role }}</h1>
     <p v-if="secretMessage">{{ secretMessage }} Server level</p>
