@@ -2,7 +2,7 @@
   <div v-show="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }}</h1>
 
-    <input type="button" value="Logout" @click="logout" />
+    <input type="button" value="Logout" @click="logout()" />
   </div>
   
 </template>
@@ -27,8 +27,10 @@ export default {
     async logout() {
       this.msg =  await AuthService.logout().msg;
       this.$store.dispatch('logout');
-      this.$router.push('/login');
-    }
-  }
-};
+      this.$router.push('/');
+      
+  },
+  
+}
+}
 </script>

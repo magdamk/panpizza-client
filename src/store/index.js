@@ -37,6 +37,7 @@ export default createStore({
         },
         RESET: state => {
             Object.assign(state, getDefaultState());
+
         }
     },
     actions: {

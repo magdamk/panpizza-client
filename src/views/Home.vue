@@ -8,10 +8,16 @@
       <br/><br/>
       </div>
     <h3>PIZZA</h3>
-    <div v-for="(item,index) in menu.pizza" :key="item._id"> <b>{{item.name}}</b>
+    <div v-for="(item,index) in menu.pizza" :key="item._id"  v-show="(role==='admin') || (item.available===true)"> <b>{{item.name}}</b>
         <br/>
         <br/>
-        <div v-if="role==='admin'">On menu: {{item.available}}</div>
+        <div v-if="role==='admin'">
+         {{item.position}}.
+        <br/>
+        On menu: <span v-if="item.available">{{item.available}}</span>
+                                            <span v-else  style="color:red;"> {{item.available}}</span>
+        
+        </div>
         <img v-bind:alt="`photo of pizza ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
         <br/>
         {{item.description}} 
@@ -19,7 +25,7 @@
         Price: {{item.price}} PLN
         <div v-if="role==='admin'"><input type="button" value="Edit" @click="edit(item._id)" />
          
- 
+  
         </div>
         <br/><br/><br/>
     </div>
@@ -28,6 +34,13 @@
     <div v-for="(item,index) in menu.drink" :key="item._id"> <b>{{item.name}}</b>
         <br/>
         <br/>
+        <div v-if="role==='admin'">
+        {{item.position}}.
+        <br/>
+        On menu: <span v-if="item.available">{{item.available}}</span>
+                                            <span v-else  style="color:red;"> {{item.available}}</span>
+        
+        </div>
         <img v-bind:alt="`photo of drink ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
         <br/>
         {{item.description}} 
@@ -72,15 +85,15 @@ export default {
 
     this.role = this.$store.getters.getRole;
     this.email = this.$store.getters.getUser;
+    
     await this.getMenu();
     this.secretMessage = await AuthService.getSecretContent();
   },
+  
   methods: {
     async getMenu(){
       this.menu = await MenuService.getAllItems();
       this.menu=this.menu.menu;
-      this.menu.forEach(element => {element.showEditForm = false     
-      });
     },
     
     edit(itemID){
@@ -90,7 +103,5 @@ export default {
      this.$router.push('/add');
     }
   },
-  
-   
 };
 </script>

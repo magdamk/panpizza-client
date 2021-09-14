@@ -30,7 +30,10 @@
       </div>
        <div >
          <label for="available">Available</label>
-        <input type="boolean" id="available" v-model.trim="available"/>
+         <select type="boolean" id="available" v-model.trim="available">
+          <option value=false>false</option>
+          <option value=true>true</option>
+        </select>
       </div>
       
         <div>
