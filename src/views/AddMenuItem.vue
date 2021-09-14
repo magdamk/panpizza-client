@@ -1,4 +1,5 @@
 <template>
+ <input type="button" value="Back" @click="goBack()" />
  <div v-if="role==='admin'">
  <div v-if="showAddForm">
  <h4 >Fill in all data</h4>
@@ -41,7 +42,7 @@
 <div v-if="!showAddForm">
      <br/>
      <p>{{message.msg}}</p>
-     <input type="button" value="Ok" @click="goBack()" />
+    
      </div>
 </div>
 </template>
@@ -86,7 +87,6 @@ async created() {
         };
       
         this.message = await MenuService.addMenuItem(params);
-        console.log('zapis', this.message);
         this.showAddForm = false;
        
     },

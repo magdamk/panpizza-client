@@ -68,8 +68,8 @@ export default {
       });
     },
     
-    edit(id){
-      this.$router.push('/edit/'+id);
+    edit(itemID){
+      this.$router.push('/edit/'+itemID);
     },
     add() {
      this.$router.push('/add');

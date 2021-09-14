@@ -1,4 +1,5 @@
 <template>
+     <input type="button" value="Back" @click="goBack()" />
  <div v-if="role==='admin'">
  <div v-show="showEditForm">
    <h4 >Edytuj wybrane pozycje</h4>
@@ -29,15 +30,22 @@
       </div>
       
         <div>
-            <button class="btn waves-effect waves-light" type="submit">Submit<i class="material-icons right"></i></button>
+            <button class="btn waves-effect waves-light" type="submit">Save changes<i class="material-icons right"></i></button>
         </div>
      
     </form>
+
+    <div><input type="button" value="Delete menu item" @click="deleteMenuItem()" /></div>
     </div>
+   
      <div v-if="!showEditForm">
      <br/>
      <p>{{message.msg}}</p>
-     <input type="button" value="Ok" @click="goBack()" />
+      <div v-if="showDelete">
+        <input type="button" value="Cancel" @click="showForm()" />
+        <input type="button" value="Delete confirm" @click="deleteItem()" />
+     </div>
+     
      </div>
 </div>
 </template>
@@ -47,12 +55,13 @@
 import MenuService from '@/services/MenuService.js';
 export default {
     name: 'EditForm',
+    /*
     props: {
         itemID: {
             type: String,
             required: true
         }
-    },
+    },*/
     data() {
         return {
         item:'',
@@ -65,7 +74,9 @@ export default {
         type: '',
         position: null,
         available: false,
-        showEditForm: true
+        showEditForm: true,
+        showDelete: false,
+        message: { msg: ''}
     };
 },
 async created() {
@@ -98,6 +109,19 @@ async created() {
         this.message = await MenuService.updateItem(this.item._id,params);
         this.showEditForm = !this.showEditForm;
        
+    },
+    deleteMenuItem(){
+      this.showEditForm = !this.showEditForm;
+      this.showDelete = true;
+      this.message.msg = "Please confirm Menu Item Deletion";
+    },
+    async deleteItem(){
+         this.message = await MenuService.deleteItem(this.item._id);
+        this.showDelete = false;
+    },
+    showForm(){
+      this.showEditForm = !this.showEditForm;
+      this.showDelete = false;
     },
     goBack(){
          this.$router.push('/');

@@ -11,6 +11,9 @@ export default {
     updateItem(itemID, params) {
         return axios.patch(url + 'home/' + itemID, params).then(response => response.data);
     },
+    deleteItem(itemID) {
+        return axios.delete(url + 'home/del/' + itemID).then(response => response.data);
+    },
     addMenuItem(params) {
         return axios.post(url + 'home/add', params).then(response => response.data);
     }
