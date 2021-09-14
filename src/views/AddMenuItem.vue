@@ -18,7 +18,10 @@
       </div>
        <div>
          <label for="type">Type</label>
-        <input type="text" id="type" v-model.trim="type"/>
+        <select type="text" id="type" v-model.trim="type">
+          <option value="pizza">PIZZA</option>
+          <option value="drink">NAPOJE</option>
+        </select>
       </div>
       <div >
          <label for="price">Price</label>

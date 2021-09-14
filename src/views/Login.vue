@@ -2,7 +2,7 @@
   <div v-if="!this.$store.getters.isLoggedIn">
     <h1>Login</h1>
     <input type="text" placeholder="Email" v-model="email" />
-    <input type="text" placeholder="Password" v-model="password" />
+    <input type="password" placeholder="Password" v-model="password" />
     <input type="button" @click="login" value="Login" />
     <p v-if="msg">{{ msg }}</p>
   </div>

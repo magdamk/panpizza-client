@@ -2,10 +2,10 @@
   <div v-if="!this.$store.getters.isLoggedIn">
     <h1>Sign Up</h1>
     <div v-show="show">
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="text" placeholder="Password" v-model="password" />
+    <input type="email" placeholder="Email" v-model="email" />
+    <input type="password" placeholder="Password" v-model="password" />
     <input
-      type="text"
+      type="password"
       placeholder="Password (repeat)"
       v-model="password_repeat"
     />

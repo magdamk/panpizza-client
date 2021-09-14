@@ -16,6 +16,10 @@
          <label for="photo">Photo</label>
         <input type="text" id="photo" v-model.trim="photo"/>
       </div>
+       <select type="text" id="type" v-model.trim="type">
+          <option value="pizza">PIZZA</option>
+          <option value="drink">NAPOJE</option>
+        </select>
       <div >
          <label for="price">Price</label>
         <input type="number" id="price" v-model.trim="price"/>
