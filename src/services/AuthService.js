@@ -16,5 +16,8 @@ export default {
     },
     verify(credentials) {
         return axios.get(url + 'verify/' + credentials).then(response => response.data);
+    },
+    logout() {
+        return axios.delete(url + 'logout/').then(response => response.data);
     }
 };

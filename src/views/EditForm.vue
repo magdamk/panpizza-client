@@ -84,7 +84,7 @@ export default {
     };
 },
 async created() {
-    if (!this.$store.getters.isLoggedIn || this.$store.getters.getRole !== 'admin') {
+    if (!this.$store.getters.isLoggedIn && this.$store.getters.getRole !== 'admin') {
       this.$router.push('/login');
     }
     this.role = this.$store.getters.getRole;
