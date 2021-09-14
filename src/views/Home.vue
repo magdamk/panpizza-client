@@ -11,6 +11,7 @@
     <div v-for="(item,index) in menu.pizza" :key="item._id"> <b>{{item.name}}</b>
         <br/>
         <br/>
+        <div v-if="role==='admin'">On menu: {{item.available}}</div>
         <img v-bind:alt="`photo of pizza ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
         <br/>
         {{item.description}} 
