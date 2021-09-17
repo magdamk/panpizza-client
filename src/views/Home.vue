@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+  User: {{$store.getters.getUser}}
     <h1>Welcome to PAN*PIZZA</h1>
     <h2>Menu</h2>
 
@@ -67,8 +68,6 @@ export default {
   data() {
     return {
       menu: '',
-     // item:'',
-      secretMessage: '',
       email: '',
       role: '',
       showAddForm: false,
@@ -87,7 +86,6 @@ export default {
     this.email = this.$store.getters.getUser;
     
     await this.getMenu();
-    this.secretMessage = await AuthService.getSecretContent();
   },
   
   methods: {
