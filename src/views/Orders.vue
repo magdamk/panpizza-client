@@ -2,8 +2,10 @@
 <div v-if="$store.getters.getRole==='admin'">
 <p>Hello {{$store.getters.getRole}}!</p>
 <p>Today is {{today}}</p>
+<div v-show="!orders.length">No orders yet today</div>
+   
     <h2>Orders</h2>
-    <div >
+    <div>
     <table>
     <thead>
         <tr>
@@ -63,7 +65,7 @@
     </tbody>
     </table>
     </div>
-    <div >No orders yet today</div>
+   <br/>
     <p>Search past orders by date: </p>
     <div>
         <form @submit.prevent="getAllOrders(date)">
@@ -75,7 +77,7 @@
             <button type="submit">Search<i class="material-icons right">send</i></button>
             </div>
         </form>
-    </div>
+    </div> 
 </div>
 </template>
 
@@ -96,14 +98,11 @@ export default {
   },
     async mounted()  {
         if (this.$store.getters.getRole !== 'admin') {
-        this.$router.push('/login');
+        this.$router.push('/');
         };
         await this.getAllOrders();
     },
-    watch: {
-    // call again the method if the route changes
-    '$route': 'getAllOrders'
-    },
+    
     methods: {
         async getAllOrders(){
             const query = "?dateString=" + this.date;

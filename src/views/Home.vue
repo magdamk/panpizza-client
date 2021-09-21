@@ -1,6 +1,7 @@
 <template>
   <div class="home">
   User: {{$store.getters.getUser}}
+  <h3>Cart</h3>
     <h1>Welcome to PAN*PIZZA</h1>
     <h2>Menu</h2>
 
@@ -24,6 +25,7 @@
         {{item.description}} 
         <br/>
         Price: {{item.price}} PLN
+        <div v-if="role!=='admin'"><input type="button" value="Add to cart" @click="addToCart(item._id)" /></div>
         <div v-if="role==='admin'"><input type="button" value="Edit" @click="edit(item._id)" />
          
   
@@ -99,7 +101,9 @@ export default {
       this.menu = await MenuService.getAllItems();
       this.menu=this.menu.menu;
     },
-    
+    addToCart() {
+
+    },
     edit(itemID){
       this.$router.push('/edit/'+itemID);
     },

@@ -68,6 +68,12 @@ const routes = [{
         path: "/orders/:orderID",
         name: "Order",
         component: Order
+    },
+    {
+        path: "/:catchAll(.*)",
+        name: "NotFound",
+        component: () =>
+            import ( /* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
     }
 ]
 
