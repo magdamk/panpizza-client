@@ -1,8 +1,7 @@
 <template>
-<div>
+<div v-if="$store.getters.getRole==='admin'">
 <p>Hello {{$store.getters.getRole}}!</p>
 <p>Today is {{today}}</p>
-{{orders}}
     <h2>Orders</h2>
     <div >
     <table>
@@ -96,7 +95,7 @@ export default {
     };
   },
     async mounted()  {
-        if (!this.$store.getters.isLoggedIn && this.$store.getters.getRole !== 'admin') {
+        if (this.$store.getters.getRole !== 'admin') {
         this.$router.push('/login');
         };
         await this.getAllOrders();

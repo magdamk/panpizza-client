@@ -9,10 +9,7 @@ export default {
         return axios.post(url + 'order/' + id, params).then(response => response.data);
     },
     getOrder(id) {
-        console.log('jestem!');
-        const data = axios.get(url + 'orders/' + id).then(response => response.data);
-        console.log('SERVICE', data);
-        return data;
+        return axios.get(url + 'orders/' + id).then(response => response.data);
     },
     getAllOrders(query) {
         return axios.get(url + 'order/' + query).then(response => response.data);

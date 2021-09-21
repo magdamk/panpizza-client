@@ -1,28 +1,29 @@
 <template>
+<div v-if="$store.getters.getRole==='admin'">
  <input type="button" value="Back" @click="goBack()" />
  <br/>
  <br/>
  <h4>Order nr {{orderID}}</h4>
  <div>
  <p><b>Client: </b></p>
- <p>{{order.order[0].client[0].first_name + ' '+ order.order[0].client[0].last_name}}</p>
- <p>Phone : {{order.order[0].client[0].phone}}</p>
-  <p>Address: {{order.order[0].client[0].street + ' '+ order.order[0].client[0].house}}
-  <span v-if="order.order[0].client[0].flat">/{{order.order[0].client[0].flat}}</span>
+ <p>{{order.client[0].first_name + ' '+ order.client[0].last_name}}</p>
+ <p>Phone : {{order.client[0].phone}}</p>
+  <p>Address: {{order.client[0].street + ' '+ order.client[0].house}}
+  <span v-if="order.client[0].flat">/{{order.client[0].flat}}</span>
   </p>
 
 </div>
 <div>
  <p><b>Order: </b></p>
-<p v-for="(product, ind) in order.order[0].product">{{ind+1 + '. ' + product.name}}</p>
- <p>Status: {{order.order[0].status}}</p>
+<p v-for="(product, ind) in order.product">{{ind+1 + '. ' + product.name}}</p>
+ <p>Status: {{order.status}}</p>
  <div>
  <form @submit.prevent="changeStatus(orderID)">
  <label for="status">Status: </label>
-            <select type="text" id="status" v-model="status">
-          <option value="new">new</option>
-          <option value="accepted">accepted</option>
-          <option value="complete">complete</option>
+        <select type="text" id="status" v-model="status">
+          <option value="pending">Pending</option>
+          <option value="in progress">In progress</option>
+          <option value="complete">Complete</option>
         </select>
 
 <button type="submit" >Change status</button>
@@ -30,7 +31,7 @@
 </div>
 <input type="button" value="Cancel order" @click="deleteOrder(orderID)" />
 </div>
-{{order}}
+</div>
 </template>
 
 <script>
@@ -40,35 +41,38 @@ export default {
     data() {
     return {
         orderID: this.$route.params.orderID,
-        order: [],
+        order: {},
         status: ''
     };
   },
     async created()  {
-        if (!this.$store.getters.isLoggedIn && this.$store.getters.getRole !== 'admin') {
-        this.$router.push('/login');
+        if (!this.$store.getters.getRole !== 'admin') {
+        this.$router.push('/');
         }
         await this.getOrder(this.orderID);
-        this.status = this.order.order[0].status;
+        this.status = this.order.status;
     },
-    watch: {
-    // call again the method if the route changes
-    '$route': 'getOrder(this.orderID)'
-  },
     methods: {
        goBack(){
          this.$router.push('/orders');
        },
-       async getOrder(orderID){
-        this.order = await OrderService.getOrder(this.orderID);
+       async getOrder(id){
+        this.order = await OrderService.getOrder(id);
+        this.order = this.order.order[0];
        },
         async changeStatus(id){
             const params = {};
-            if (this.status != this.order.order[0].status)
+            if (this.status != this.order.status)
             { params.status = this.status;
             const result = await OrderService.changeOrderStatus(id, params);
-            this.$router.push('/orders/'+orderID);
+            this.goBack();
             }
+        },
+        async deleteOrder(id){
+            const params = {status: 'cancelled'};
+            
+            const result = await OrderService.changeOrderStatus(id, params);
+            this.goBack();
         }
     }
     }
