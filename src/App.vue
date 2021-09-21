@@ -4,6 +4,7 @@
     <router-link to="/about">|About</router-link> 
     <router-link v-if="!this.$store.getters.isLoggedIn" to="/sign-up">|SignUp</router-link>
     <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">|Login</router-link>
+    <router-link v-if="this.$store.getters.getRole==='admin'" to="/orders">|Orders</router-link>
     <router-link v-if="this.$store.getters.isLoggedIn" to="/account">|Account</router-link>
     <router-link v-if="this.$store.getters.isLoggedIn" to="/logout">|Logout</router-link>
 

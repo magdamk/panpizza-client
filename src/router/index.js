@@ -5,8 +5,10 @@ import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Verify from "../views/Verify.vue";
 import Account from "../views/Account.vue";
-import EditForm from "../views/EditForm.vue"
-import AddMenuItem from "../views/AddMenuItem.vue"
+import EditForm from "../views/EditForm.vue";
+import AddMenuItem from "../views/AddMenuItem.vue";
+import Orders from "../views/Orders.vue";
+import Order from "../views/Order.vue";
 
 const routes = [{
         path: '/',
@@ -56,6 +58,16 @@ const routes = [{
         path: "/verify/:userID/:token",
         name: "verify",
         component: Verify
+    },
+    {
+        path: "/orders/",
+        name: "Orders",
+        component: Orders
+    },
+    {
+        path: "/orders/:orderID",
+        name: "Order",
+        component: Order
     }
 ]
 
