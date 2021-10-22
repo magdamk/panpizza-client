@@ -1,47 +1,113 @@
 <template>
   <div>
-  <h2>Data</h2>
+  <h2>USER DATA <i class="fas fa-address-card"></i></h2>
   <div v-if="showEditForm">
   <p>{{msg}}</p>
   <h4 >Edytuj wybrane pozycje</h4>
-    <form @submit.prevent="updateUserData" >
-      <div>
-        <label for="first_name">First name</label>
-        <input type="text" id="first_name" v-model.trim="first_name" />
-      </div>
-      <div>
-        <label for="last_name">Last name</label>
-        <input type="text" id="last_name" v-model.trim="last_name" />
-      </div>
-      <div>
-         <label for="street">Street</label>
-        <input type="text" id="street" v-model.trim="street"/>
-      </div>
-      <div >
-         <label for="house">House</label>
-        <input type="text" id="house" v-model.trim="house"/>
-      </div>
-      <div >
-         <label for="flat">Flat</label>
-        <input type="text" id="flat" v-model.trim="flat"/>
-      </div>
-      <div>
-         <label for="zip">Zip-code</label>
-         <input type="text" id="zip" v-model.trim="zip"/>
-      </div>
-      <div >
-         <label for="city">City</label>
-        <input type="text" id="city" v-model.trim="city"/>
-      </div>
-      <div >
-      <div>
-         <label for="phone">Phone</label>
-        <input type="tel" id="phone" v-model.number="phone" min="0"/>
+    <form class="form" @submit.prevent="updateUserData" >
+      <div class="field is-horizontal">
+       <div class="field-body">
+        <div class="field">
+        <label class="label" for="first_name">First name</label>
+         <p class="control is-expanded has-icons-left">
+          
+          <input class="input" type="text" id="first_name" v-model.trim="first_name" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </p>
+        </div>
+       <div class="field">
+       <label class="label" for="last_name">Last name</label>
+       <p class="control is-expanded has-icons-left">
+        
+        <input class="input" type="text" id="last_name" v-model.trim="last_name" />
+         <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+        
+      </p>
       </div>
       </div>
-         <div>
-        <input type="button" value="Cancel" @click="edit" />
-            <button class="btn waves-effect waves-light" type="submit">Submit<i class="material-icons right"></i></button>
+      </div>
+      
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label" for="street">Street</label>
+            <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" id="street" v-model.trim="street"/>
+            <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+            </span>
+            </p>
+          </div>
+          <div class="field">
+            <label class="label" for="house">House</label>
+            <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" id="house" v-model.trim="house"/>
+            <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+            </span>
+            </p>
+          </div>
+          <div class="field">
+              <label class="label" for="flat">Flat</label>
+              <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" id="flat" v-model.trim="flat"/>
+            <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+            </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+  <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+             <label class="label" for="zip">Zip-code</label>
+            <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" id="zip" v-model.trim="zip"/>
+            <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+            </span>
+            </p>
+          </div>
+          <div class="field">
+             <label class="label" for="city">City</label>
+            <p class="control is-expanded has-icons-left">
+            <input class="input" type="text" id="city" v-model.trim="city"/>
+            <span class="icon is-small is-left">
+            <i class="fas fa-map-marker-alt"></i>
+            </span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+      
+      
+      <div class="field is-horizontal">
+      <div class="field">
+         <label class="label" for="phone">Phone</label>
+          <p class="control is-expanded has-icons-left">
+        <input class="input" type="tel" id="phone" v-model.number="phone" min="0"/>
+        <span class="icon is-small is-left">
+            <i class="fas fa-phone"></i>
+            </span>
+            </p>
+      </div>
+      </div>
+         <div class="field is-horizontal">
+         <div class="field-body">
+         <div class="field">
+          <input class="button is-danger" type="button" value="Cancel" @click="edit" />
+          </div>
+          <div class="field">
+            <button class="button is-link" type="submit">Submit<i class="material-icons right"></i></button>
+            </div>
+          </div>  
         </div>
      
     </form>
@@ -54,8 +120,9 @@
     <h4>Adress:</h4>
     <p>{{userData.street}} {{userData.house}} <span v-if="userData.flat">/ {{userData.flat}}</span></p>
     <p> {{userData.zip}} {{userData.city}} </p>
-    <p>Phone: {{userData.phone}} </p>
-    <input type="button" value="Edit" @click="edit" />
+    <h4>Phone:</h4>
+    <p> {{userData.phone}} </p>
+    <input v-if="!showEditForm" type="button" class="button is-primary" value="Edit" @click="edit" />
   </div>
 </template>
 <script>
@@ -128,3 +195,8 @@ export default {
   }
 };
 </script>
+<style>
+  h4, h2 {
+    font-weight: bold;
+  }
+</style>

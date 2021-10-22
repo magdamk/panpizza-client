@@ -6,7 +6,7 @@
    
     <h2>Orders</h2>
     <div>
-    <table>
+    <table class="table">
     <thead>
         <tr>
             <th>
@@ -114,8 +114,8 @@ export default {
             return new Date().toISOString().split("T")[0];
 
         },
-        goToOrder(id) {
-        this.$router.push("/orders/" + id);
+        goToOrder(orderId) {
+        this.$router.push("/orders/"+orderId);
         }
     }
 }

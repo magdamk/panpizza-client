@@ -2,7 +2,7 @@
   <div v-show="this.$store.getters.isLoggedIn">
     <h1>Hi {{ email }}</h1>
 
-    <input type="button" value="Logout" @click="logout()" />
+    <input class="button is-link" type="button" value="Logout" @click="logout()" />
   </div>
   
 </template>

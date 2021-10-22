@@ -46,10 +46,10 @@ export default {
     };
   },
     async created()  {
-        if (!this.$store.getters.getRole !== 'admin') {
+        if (this.$store.getters.getRole !== 'admin') {
         this.$router.push('/');
         }
-        await this.getOrder(this.orderID);
+        await this.getOrder(this.$route.params.orderID);
         this.status = this.order.status;
     },
     methods: {
@@ -65,14 +65,14 @@ export default {
             if (this.status != this.order.status)
             { params.status = this.status;
             const result = await OrderService.changeOrderStatus(id, params);
-            this.goBack();
+            this.$router.push('/orders/');
             }
         },
         async deleteOrder(id){
             const params = {status: 'cancelled'};
             
             const result = await OrderService.changeOrderStatus(id, params);
-            this.goBack();
+            this.$router.push('/orders/');
         }
     }
     }

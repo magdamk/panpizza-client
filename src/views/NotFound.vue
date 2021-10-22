@@ -1,7 +1,7 @@
 <template>
  <div> 
    <h3>Page not found.</h3>
-    <input type="button" value="Back" @click="this.$router.push('/')" />
+    <input type="button" class="button is-primary" value="Back" @click="this.$router.push('/')" />
  </div>
 </template>
 <script>

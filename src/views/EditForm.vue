@@ -3,7 +3,7 @@
  <div v-if="role==='admin'">
  <div v-show="showEditForm">
    <h4 >Edytuj wybrane pozycje</h4>
-    <form @submit.prevent="updateItem(item)" >
+    <form class="form" @submit.prevent="updateItem(item)" >
       <div>
         <label for="name">Name</label>
         <input type="text" id="name" v-model.trim="name" />

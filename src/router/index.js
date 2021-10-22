@@ -60,7 +60,7 @@ const routes = [{
         component: Verify
     },
     {
-        path: "/orders/",
+        path: "/orders",
         name: "Orders",
         component: Orders
     },

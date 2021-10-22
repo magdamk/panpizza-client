@@ -1,9 +1,27 @@
 <template>
   <div v-if="!this.$store.getters.isLoggedIn">
     <h1>Login</h1>
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <input type="button" @click="login" value="Login" />
+     <div class="field">
+        <label class="label">Email</label>
+        <p class="control has-icons-left">
+        
+        <input type="email" placeholder="Email" v-model="email" class="input" style="width:500px;"/>
+        <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+    </p></div>
+    <div class="field">
+     <label class="label">Password</label>
+    <p class="control has-icons-left">
+    <input type="password" placeholder="Password" v-model="password" class="input" style="width:500px;"/>
+    <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+    </p></div>
+     <div class="field">
+    <input type="button" @click="login" value="Login" class="button is-link"/>
+    </div>
+   
     <p v-if="msg">{{ msg }}</p>
   </div>
 </template>

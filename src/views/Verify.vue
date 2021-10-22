@@ -2,7 +2,7 @@
   <div>
     <h1>Welocme to PAN*PIZZA</h1>
     
-    <p>Please  <input type="button" value="Login" @click="login" /></p>
+    <p>Please  <input class="button is-link" type="button" value="Login" @click="login" /></p>
     <p>{{msg}} </p>
   </div>
 </template>

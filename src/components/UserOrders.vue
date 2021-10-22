@@ -2,7 +2,7 @@
 <div>
     <h2>Orders</h2>
     <div v-if="userOrders.length">
-    <table>
+    <table class="table">
     <thead>
         <tr>
             <th>
