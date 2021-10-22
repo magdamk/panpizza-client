@@ -47,47 +47,7 @@
         </div>
      
     </form>
-    <form @submit.prevent="addMenuItem" >
-      <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" v-model.trim="name" />
-      </div>
-      <div>
-        <label for="description">Description</label>
-        <input type="text" id="description" v-model.trim="description" />
-      </div>
-      <div>
-         <label for="photo">Photo</label>
-        <input type="text" id="photo" v-model.trim="photo"/>
-      </div>
-       <div>
-         <label for="type">Type</label>
-        <select type="text" id="type" v-model.trim="type">
-          <option value="pizza">PIZZA</option>
-          <option value="drink">NAPOJE</option>
-        </select>
-      </div>
-      <div >
-         <label for="price">Price</label>
-        <input type="number" id="price" v-model.trim="price"/>
-      </div>
-      <div >
-         <label for="position">Position</label>
-        <input type="number" id="position" v-model.trim="position"/>
-      </div>
-      <div >
-         <label for="available">Available</label>
-         <select type="boolean" id="available" v-model.trim="available">
-          <option value=false>false</option>
-          <option value=true>true</option>
-        </select>
-      </div>
-      
-        <div>
-            <button class="btn waves-effect waves-light" type="submit">Submit<i class="material-icons right"></i></button>
-        </div>
-     
-    </form>
+    
 </div>
 <div v-if="!showAddForm">
      <br/>
