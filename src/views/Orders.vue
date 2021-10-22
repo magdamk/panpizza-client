@@ -13,6 +13,9 @@
                 Nr
             </th>
             <th>
+                Time
+            </th>    
+            <th>
                 Client
             </th>
             <th>
@@ -40,6 +43,9 @@
             <td>
                 {{index+1}}
             </td>
+            <td>
+                {{order.date.slice(11,19)}}
+            </td>
              <td>
                 {{order.client[0].first_name + ' ' + order.client[0].last_name}}
             </td>
@@ -59,7 +65,7 @@
                 {{order.status}}
             </td>
             <td>
-            <input type="button" value="Details" @click="goToOrder(order._id)" />
+            <input type="button" class="button" value="Details" @click="goToOrder(order._id)" />
             </td>
         </tr>
     </tbody>
@@ -68,13 +74,14 @@
    <br/>
     <p>Search past orders by date: </p>
     <div>
-        <form @submit.prevent="getAllOrders(date)">
-            <div>
-            <label for="date">Date: </label>
-            <input type="date" id="date" v-model.date ="date" v-bind="{max : setNow()}">
+        <form class="form" @submit.prevent="getAllOrders(date)">
+
+            <div class="field">
+            <label class="label" for="date">Date: </label>
+            <input class="input" type="date" id="date" v-model.date ="date" v-bind="{max : setNow()}" style="width:150px;">
             </div>
-            <div>
-            <button type="submit">Search<i class="material-icons right">send</i></button>
+            <div class="field">
+            <button class="button is-link" type="submit"><span>Search</span><span class="icon"><i class="fas fa-search"></i></span></button>
             </div>
         </form>
     </div> 

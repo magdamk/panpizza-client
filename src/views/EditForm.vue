@@ -1,56 +1,63 @@
 <template>
-     <input type="button" value="Back" @click="goBack()" />
+<br/>
+     <input type="button" class="button is-link" value="Back" @click="goBack()" />
+    <br/>
  <div v-if="role==='admin'">
  <div v-show="showEditForm">
    <h4 >Edytuj wybrane pozycje</h4>
     <form class="form" @submit.prevent="updateItem(item)" >
-      <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" v-model.trim="name" />
+      <div class="field">
+        <label class="label" for="name">Name</label>
+        <input class="input" type="text" id="name" v-model.trim="name" />
       </div>
-      <div>
-        <label for="description">Description</label>
-        <input type="text" id="description" v-model.trim="description" />
+      <div class="field">
+        <label class="label" for="description">Description</label>
+        <input class="input"  type="text" id="description" v-model.trim="description" />
       </div>
-      <div>
-         <label for="photo">Photo</label>
-        <input type="text" id="photo" v-model.trim="photo"/>
+      <div class="field">
+         <label class="label" for="photo">Photo</label>
+        <input class="input" type="text" id="photo" v-model.trim="photo"/>
       </div>
+      <div class="select">
        <select type="text" id="type" v-model.trim="type">
           <option value="pizza">PIZZA</option>
           <option value="drink">NAPOJE</option>
         </select>
-      <div >
-         <label for="price">Price</label>
-        <input type="number" id="price" v-model.trim="price"/>
       </div>
-       <div >
-         <label for="position">Position</label>
-        <input type="number" id="position" v-model.trim="position"/>
+      <div class="field">
+         <label class="label" for="price">Price</label>
+        <input class="input" type="number" id="price" v-model.trim="price"/>
       </div>
-       <div >
-         <label for="available">Available</label>
+       <div class="field">
+         <label class="label" for="position">Position</label>
+        <input class="input" type="number" id="position" v-model.trim="position"/>
+      </div>
+       <div class="field" >
+         <label class="label" for="available">Available</label>
+         <div class="select">
          <select type="boolean" id="available" v-model.trim="available">
           <option value=false>false</option>
           <option value=true>true</option>
         </select>
+        </div>
       </div>
       
-        <div>
-            <button class="btn waves-effect waves-light" type="submit">Save changes<i class="material-icons right"></i></button>
+        <div class="field">
+            <button class="button is-info" type="submit">Save changes<i class="material-icons right"></i></button>
+            <input class="button is-danger" type="button" value="Delete menu item" @click="deleteMenuItem()" />
         </div>
      
     </form>
 
-    <div><input type="button" value="Delete menu item" @click="deleteMenuItem()" /></div>
+    <div></div>
     </div>
    
      <div v-if="!showEditForm">
      <br/>
      <p>{{message.msg}}</p>
       <div v-if="showDelete">
-        <input type="button" value="Cancel" @click="showForm()" />
-        <input type="button" value="Delete confirm" @click="deleteItem()" />
+        <input class="button is-primary" type="button" value="Cancel" @click="showForm()" />
+        <input class="button is-danger" type="button" value="Delete confirm" @click="deleteItem()" />
      </div>
      
      </div>

@@ -50,7 +50,7 @@
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-link" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
+      <button class="button is-info" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
     </div>
@@ -102,7 +102,7 @@
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-link" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
+      <button class="button is-info" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
     </div>

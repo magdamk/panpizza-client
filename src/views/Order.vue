@@ -1,6 +1,7 @@
 <template>
+<br/>
 <div v-if="$store.getters.getRole==='admin'">
- <input type="button" value="Back" @click="goBack()" />
+ <input type="button" class="button is-link" value="Back" @click="goBack()" />
  <br/>
  <br/>
  <h4>Order nr {{orderID}}</h4>
@@ -18,18 +19,22 @@
 <p v-for="(product, ind) in order.product">{{ind+1 + '. ' + product.name}}</p>
  <p>Status: {{order.status}}</p>
  <div>
- <form @submit.prevent="changeStatus(orderID)">
- <label for="status">Status: </label>
-        <select type="text" id="status" v-model="status">
+ <form class="form" @submit.prevent="changeStatus(orderID)">
+ <label class="label" for="status">Status: </label>
+  <div class="select is=primary">
+        <select class="select" type="text" id="status" v-model="status">
           <option value="pending">Pending</option>
           <option value="in progress">In progress</option>
           <option value="complete">Complete</option>
         </select>
+  </div>
+      <button class="button is-warning" type="submit" >Change status</button>
 
-<button type="submit" >Change status</button>
+
 </form>
 </div>
-<input type="button" value="Cancel order" @click="deleteOrder(orderID)" />
+<br/>
+<input type="button" class="button is-danger" value="Cancel order" @click="deleteOrder(orderID)" />
 </div>
 </div>
 </template>
