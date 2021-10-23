@@ -17,9 +17,7 @@ export default {
     };
   },
   async created() {
-    if (!this.$store.getters.isLoggedIn) {
-      this.$router.push('/login');
-    }
+    
     this.email = this.$store.getters.getUser;
   //  this.secretMessage = await AuthService.getSecretContent();
   },
@@ -27,8 +25,8 @@ export default {
     async logout() {
       this.msg =  await AuthService.logout().msg;
       this.$store.dispatch('logout');
+      this.$forceUpdate();
       this.$router.push('/');
-      
   },
   
 }

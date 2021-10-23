@@ -144,14 +144,7 @@ export default {
     this.email = this.$store.getters.getUser;
     
     await this.getMenu();
-  }
-  /*,
-  watch: {
-    // call again the method if the route changes
-    '$route': 'getMenu'
-    }
-    */
-    ,
+  },
   methods: {
     async getMenu(){
       this.menu = await MenuService.getAllItems();

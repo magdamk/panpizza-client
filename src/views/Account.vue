@@ -26,14 +26,9 @@ export default {
   },
   
   async created() {
-    if (!this.$store.getters.isLoggedIn) {
-      this.$router.push('/login');
-    };
-   
     this.email = this.$store.getters.getUser;
     await this.getUserData(this.email);
     await this.getUserOrders(this.userData._id);
-  //  this.secretMessage = await AuthService.getSecretContent();
   },
   methods: {
     async getUserData(email){
@@ -41,7 +36,6 @@ export default {
             this.userData = await UserService.getUserData(email);
             this.msg = this.userData.msg;
             this.userData = this.userData.userData;
-            
         }
     },
     async getUserOrders(id){
@@ -53,7 +47,6 @@ export default {
         },
     async userDataChange(){
      await this.getUserData(this.email);
-  //  console.log(this.userData);
     }
   }
 };

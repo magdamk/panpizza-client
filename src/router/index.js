@@ -9,6 +9,8 @@ import EditForm from "../views/EditForm.vue";
 import AddMenuItem from "../views/AddMenuItem.vue";
 import Orders from "../views/Orders.vue";
 import Order from "../views/Order.vue";
+import store from '../store';
+import AuthService from '@/services/AuthService.js';
 
 const routes = [{
         path: '/',
@@ -18,12 +20,14 @@ const routes = [{
     {
         path: '/edit/:itemID',
         name: 'EditForm',
-        component: EditForm
+        component: EditForm,
+        meta: { requiresAuth: true }
     },
     {
         path: '/add',
         name: 'AddMenuItem',
-        component: AddMenuItem
+        component: AddMenuItem,
+        meta: { requiresAuth: true }
     },
     {
         path: '/about',
@@ -47,12 +51,14 @@ const routes = [{
     {
         path: "/account",
         name: "account",
-        component: Account
+        component: Account,
+        meta: { requiresAuth: true }
     },
     {
         path: "/logout",
         name: "logout",
-        component: Logout
+        component: Logout,
+        meta: { requiresAuth: true }
     },
     {
         path: "/verify/:userID/:token",
@@ -62,12 +68,14 @@ const routes = [{
     {
         path: "/orders",
         name: "Orders",
-        component: Orders
+        component: Orders,
+        meta: { requiresAuth: true }
     },
     {
         path: "/orders/:orderID",
         name: "Order",
-        component: Order
+        component: Order,
+        meta: { requiresAuth: true }
     },
     {
         path: "/:catchAll(.*)",
@@ -77,11 +85,19 @@ const routes = [{
     }
 ]
 
+
+
 const router = createRouter({
     history: createWebHashHistory(),
     routes
 })
 
-
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth) {
+        if (!store.getters.isLoggedIn) {
+            next({ name: 'Home' })
+        } else { next() }
+    } else { next() }
+})
 
 export default router
