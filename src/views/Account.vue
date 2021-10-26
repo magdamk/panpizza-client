@@ -1,6 +1,6 @@
 <template>
   <div v-if="$store.getters.isLoggedIn">
-
+  <br/>
   <UserData :userData="userData" :email="email" @userDataChange="userDataChange" />
   <div v-show="$store.getters.getRole==='user'">
   <UserOrders :userOrders="userOrders"   />

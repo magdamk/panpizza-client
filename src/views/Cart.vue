@@ -40,7 +40,6 @@
   </div>
 </template>
 <script>
-import MenuService from '@/services/MenuService.js';
 import OrderService from '@/services/OrderService.js';
 import CartListItem from "@/components/CartListItem.vue";
 export default {
@@ -59,12 +58,7 @@ export default {
   methods: {
     removeAllCartItems(){
       this.$store.dispatch('removeAllCartItems');
-    },
-    async getItemById(id){
-      const result = await MenuService.getItemByID(id);
-     
-      return result.item[0];
-      
+      this.cartItems = this.$store.getters.getCartItems
     },
     async checkOut(){
       const id = this.$store.getters.getId;

@@ -1,6 +1,7 @@
 <template>
   <div>
-  <h2>USER DATA <i class="fas fa-address-card"></i></h2>
+  <i class="fa fa-2x fa-address-card"></i>
+  <h2>USER DATA </h2>
   <div v-if="showEditForm">
   <p>{{msg}}</p>
   <h4 >Edytuj wybrane pozycje</h4>
