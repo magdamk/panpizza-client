@@ -25,7 +25,6 @@ export default {
     async logout() {
       this.msg =  await AuthService.logout().msg;
       this.$store.dispatch('logout');
-      this.$forceUpdate();
       this.$router.push('/');
   },
   

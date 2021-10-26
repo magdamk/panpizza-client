@@ -9,8 +9,8 @@ import EditForm from "../views/EditForm.vue";
 import AddMenuItem from "../views/AddMenuItem.vue";
 import Orders from "../views/Orders.vue";
 import Order from "../views/Order.vue";
+import Cart from "../views/Cart.vue";
 import store from '../store';
-import AuthService from '@/services/AuthService.js';
 
 const routes = [{
         path: '/',
@@ -52,6 +52,12 @@ const routes = [{
         path: "/account",
         name: "account",
         component: Account,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/cart",
+        name: "cart",
+        component: Cart,
         meta: { requiresAuth: true }
     },
     {

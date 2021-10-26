@@ -1,4 +1,5 @@
 <template>
+cart {{cartItems}} {{$store.getters.cartQuantity}}
   <div class="container">
   <br/>
   <div v-if="role==='admin'"><input type="button" class="button is-primary" value="Add menu item" @click="add()" />
@@ -45,12 +46,12 @@
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-      <button class="button is-danger" @click="removeFromCart(item.id)" v-if="isInCart(item.id)"><span>remove from cart</span>
+      <button class="button is-danger" @click="removeFromCart(item._id)" v-if="isInCart(item._id)"><span>remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-info" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
+      <button class="button is-info" @click="addToCart(item._id)" ><span>add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
     </div>
@@ -102,7 +103,7 @@
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-info" @click="addToCart(item.id)" v-else><span>add to cart</span> <span class="icon">
+      <button class="button is-info" @click="addToCart(item.id)"><span>add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
     </div>
@@ -111,15 +112,11 @@
     <br/><br/><br/>
   </div>
   </div>
-    <div v-if="this.$store.getters.isLoggedIn">
-    <h1>Hi {{ email }} {{ role }}</h1>
-    <p v-if="secretMessage">{{ secretMessage }} Server level</p>
-    <p v-if="role==='admin'">Visible only for admins. Vue level.</p>
-   </div>
   </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 import AuthService from '@/services/AuthService.js';
 import MenuService from '@/services/MenuService.js';
 export default {
@@ -135,13 +132,15 @@ export default {
       price: 0,
       type: '',
       position: null,
-      available: false
+      available: false,
+      cartItems: []
     };
   },
   async created() {
 
     this.role = this.$store.getters.getRole;
     this.email = this.$store.getters.getUser;
+    this.cartItems = this.$store.getters.getCartItems;
     
     await this.getMenu();
   },
@@ -150,22 +149,27 @@ export default {
       this.menu = await MenuService.getAllItems();
       this.menu=this.menu.menu;
     },
-    addToCart(id) {
-
+    addToCart(id){
+        console.log('item id ',id);
+        this.$store.dispatch('addToCart', id);
     },
     removeFromCart(id){
-
-    },
+        this.$store.dispatch('removeFromCart', id);
+        },
     isInCart(id){
-
-    },
+            const ans = this.$store.getters.getCartItems;
+            return ans.includes(id);
+        },
     edit(itemID){
       this.$router.push('/edit/'+itemID);
     },
     add() {
      this.$router.push('/add');
-    }
-  },
+    },
+     ...mapActions(["addToCart","removeFromCart"])
+    
+    
+  }
 };
 </script>
 <style>

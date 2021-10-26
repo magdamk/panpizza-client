@@ -6,7 +6,8 @@ const getDefaultState = () => {
     return {
         token: '',
         email: {},
-        role: 'user'
+        role: 'user',
+        cartItems: []
     };
 };
 
@@ -14,6 +15,7 @@ export default createStore({
     strict: true,
     plugins: [createPersistedState()],
     state: getDefaultState(),
+
     getters: {
         isLoggedIn: state => {
             return state.token;
@@ -23,6 +25,19 @@ export default createStore({
         },
         getRole: state => {
             return state.role
+        },
+        getCartItems: state => {
+            return state.cartItems
+        },
+        cartTotal: state => {
+            return state.cartItems.reduce((acc, cartItem) => {
+                return (cartItem.quantity * cartItem.price) + acc;
+            }, 0).toFixed(2);
+        },
+        cartQuantity: state => {
+            return state.cartItems.reduce((acc, cartItem) => {
+                return cartItem.quantity + acc;
+            }, 0);
         }
     },
     mutations: {
@@ -34,6 +49,14 @@ export default createStore({
         },
         SET_ROLE: (state, role) => {
             state.role = role;
+        },
+        ADD_TO_CART(state, item) {
+            // console.log('store ad to cart echo', item);
+            state.cartItems.push(item);
+        },
+        REMOVE_FROM_CART(state, item) {
+            const ind = state.cartItems.indexOf(item);
+            state.cartItems.splice(ind, 1);
         },
         RESET: state => {
             Object.assign(state, getDefaultState());
@@ -50,6 +73,12 @@ export default createStore({
         },
         logout: ({ commit }) => {
             commit('RESET', '');
+        },
+        addToCart: ({ commit, dispatch }, item) => {
+            commit('ADD_TO_CART', item);
+        },
+        removeFromCart: ({ commit }, item) => {
+            commit('REMOVE_FROM_CART', item);
         }
     }
 })
