@@ -98,12 +98,12 @@ cart {{cartItems}} {{$store.getters.cartQuantity}}
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-      <button class="button is-danger" @click="removeFromCart(item.id)" v-if="isInCart(item.id)"><span>remove from cart</span>
+      <button class="button is-danger" @click="removeFromCart(item._id)" v-if="isInCart(item._id)"><span>remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-info" @click="addToCart(item.id)"><span>add to cart</span> <span class="icon">
+      <button class="button is-info" @click="addToCart(item._id)"><span>add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
     </div>
@@ -116,7 +116,6 @@ cart {{cartItems}} {{$store.getters.cartQuantity}}
 </template>
 
 <script>
-import {mapActions} from 'vuex';
 import AuthService from '@/services/AuthService.js';
 import MenuService from '@/services/MenuService.js';
 export default {
@@ -150,7 +149,6 @@ export default {
       this.menu=this.menu.menu;
     },
     addToCart(id){
-        console.log('item id ',id);
         this.$store.dispatch('addToCart', id);
     },
     removeFromCart(id){
@@ -165,10 +163,7 @@ export default {
     },
     add() {
      this.$router.push('/add');
-    },
-     ...mapActions(["addToCart","removeFromCart"])
-    
-    
+    }
   }
 };
 </script>

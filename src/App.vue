@@ -41,7 +41,7 @@
     <router-link v-if="this.$store.getters.isLoggedIn" to="/account">{{$store.getters.getUser}}</router-link>
     </div>
      <div class="navbar-item">
-     <router-link v-if="this.$store.getters.isLoggedIn" to="/cart"> <i class="fas fa-shopping-cart"></i></router-link>
+     <router-link v-if="this.$store.getters.isLoggedIn" to="/cart"> <i class="fas fa-shopping-cart"></i><span v-show="$store.getters.cartQuantity">({{$store.getters.cartQuantity}})</span></router-link>
      </div>
      <div class="navbar-item">
     <router-link v-if="this.$store.getters.isLoggedIn" to="/logout">Logout</router-link>

@@ -4,12 +4,12 @@
       <p class="is-inline">{{cartItem}}</p>
       <div>
         <span class="cart-item--price has-text-info has-text-weight-bold">
-          ${{cartItem.price}} X {{cartItem.quantity}}
+         xxx
         </span>
 
         <span>
-          <i class="fa fa-arrow-circle-up cart-item__modify" @click="addCartItem(cartItem)"></i>
-          <i class="fa fa-arrow-circle-down cart-item__modify" @click="removeCartItem(cartItem)"></i>
+          <i class="fa fa-arrow-circle-up " @click="addToCart(cartItem)"></i>
+          <i class="fa fa-arrow-circle-down " @click="removeFromCart(cartItem)"></i>
         </span>
       </div>
 
@@ -17,15 +17,16 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
 export default {
   name: 'CartListItem',
   props: ['cartItem'],
   methods: {
-    ...mapActions([
-      'addCartItem',
-      'removeCartItem'
-    ])
+    addToCart(id){
+        this.$store.dispatch('addToCart', id);
+    },
+    removeFromCart(id){
+        this.$store.dispatch('removeFromCart', id);
+        },
   }
 }
 </script>

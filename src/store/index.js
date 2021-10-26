@@ -11,6 +11,12 @@ const getDefaultState = () => {
     };
 };
 
+const resetCart = () => {
+    return {
+        cartItems: []
+    };
+};
+
 export default createStore({
     strict: true,
     plugins: [createPersistedState()],
@@ -35,9 +41,7 @@ export default createStore({
             }, 0).toFixed(2);
         },
         cartQuantity: state => {
-            return state.cartItems.reduce((acc, cartItem) => {
-                return cartItem.quantity + acc;
-            }, 0);
+            return state.cartItems.length;
         }
     },
     mutations: {
@@ -58,9 +62,11 @@ export default createStore({
             const ind = state.cartItems.indexOf(item);
             state.cartItems.splice(ind, 1);
         },
+        RESET_CART(state) {
+            state.cartItems = [];
+        },
         RESET: state => {
             Object.assign(state, getDefaultState());
-
         }
     },
     actions: {
@@ -74,11 +80,14 @@ export default createStore({
         logout: ({ commit }) => {
             commit('RESET', '');
         },
-        addToCart: ({ commit, dispatch }, item) => {
+        addToCart: ({ commit }, item) => {
             commit('ADD_TO_CART', item);
         },
         removeFromCart: ({ commit }, item) => {
             commit('REMOVE_FROM_CART', item);
+        },
+        removeAllCartItems: ({ commit }) => {
+            commit('RESET_CART');
         }
     }
 })

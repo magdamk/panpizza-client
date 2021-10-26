@@ -1,4 +1,5 @@
 <template>
+cart vue {{cartItems}}
   <div id="cart">
     <div class="cart--header has-text-centered">
       <i class="fa fa-2x fa-shopping-cart"></i>
@@ -11,7 +12,7 @@
           <CartListItem :cartItem="cartItem"/>
       </li>
       <div class="notification is-success">
-        <button class="delete"></button>
+        
         <p>
           Total Quantity:
           <span class="has-text-weight-bold">{{ cartQuantity }}</span>
@@ -24,7 +25,7 @@
       Checkout (<span class="has-text-weight-bold">${{ cartTotal }}</span>)
     </button>
 
- <button class="button is-danger is-outlined" @click="removeAllCartItems">
+ <button class="button is-danger is-outlined" @click="removeAllCartItems()">
     <span>Delete All items</span>
     <span class="icon is-small">
       <i class="fas fa-times"></i>
@@ -34,18 +35,26 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import CartListItem from "@/components/CartListItem.vue";
 export default {
   name: "Cart",
   components: {
     CartListItem
   },
+  data(){
+      return {
+          cartItems: this.$store.getters.getCartItems
+      }
+  },
   computed: {
-    ...mapGetters(["getCartItems", "cartTotal", "cartQuantity"]),
+    ...mapGetters(["cartTotal", "cartQuantity"]),
   },
   methods: {
-  //  ...mapActions(["removeAllCartItems"]),
+      removeAllCartItems(){
+        this.$store.dispatch('removeAllCartItems');
+        this.$forceUpdate();
+      }
   }
 };
 </script>
