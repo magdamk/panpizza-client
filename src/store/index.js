@@ -7,6 +7,7 @@ const getDefaultState = () => {
         token: '',
         email: {},
         role: 'user',
+        id: '',
         cartItems: [],
         total: 0
     };
@@ -25,7 +26,10 @@ export default createStore({
             return state.email;
         },
         getRole: state => {
-            return state.role
+            return state.role;
+        },
+        getId: state => {
+            return state.id;
         },
         getCartItems: state => {
             return state.cartItems
@@ -47,6 +51,9 @@ export default createStore({
         SET_ROLE: (state, role) => {
             state.role = role;
         },
+        SET_ID: (state, id) => {
+            state.id = id;
+        },
         ADD_TO_CART(state, item) {
             // console.log('store ad to cart echo', item);
             state.cartItems.push(item);
@@ -55,7 +62,7 @@ export default createStore({
             state.total = state.total + price;
         },
         REMOVE_FROM_CART(state, item) {
-            const ind = state.cartItems.indexOf(item);
+            const ind = state.cartItems.findIndex(i => i._id === item._id);
             state.cartItems.splice(ind, 1);
         },
         RESET_CART(state) {
@@ -67,23 +74,24 @@ export default createStore({
         }
     },
     actions: {
-        login: ({ commit, dispatch }, { token, email, role }) => {
+        login: ({ commit, dispatch }, { token, email, role, id }) => {
             commit('SET_TOKEN', token);
             commit('SET_USER', email);
             commit('SET_ROLE', role);
+            commit('SET_ID', id);
             // set auth header
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         },
         logout: ({ commit }) => {
             commit('RESET', '');
         },
-        addToCart: ({ commit, dispatch }, { id, price }) => {
-            commit('ADD_TO_CART', id);
-            commit('REFRESH_TOTAL', price);
+        addToCart: ({ commit, dispatch }, item) => {
+            commit('ADD_TO_CART', item);
+            commit('REFRESH_TOTAL', item.price);
         },
-        removeFromCart: ({ commit, dispatch }, { id, price }) => {
-            commit('REMOVE_FROM_CART', id);
-            commit('REFRESH_TOTAL', (-1) * price);
+        removeFromCart: ({ commit, dispatch }, item) => {
+            commit('REMOVE_FROM_CART', item);
+            commit('REFRESH_TOTAL', item.price * (-1));
         },
         removeAllCartItems: ({ commit }) => {
             commit('RESET_CART');

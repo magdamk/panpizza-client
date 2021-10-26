@@ -47,7 +47,8 @@ export default {
         const token = response.token;
         const email = response.email;
         const role = response.role;
-        this.$store.dispatch('login', { token, email, role });
+        const id = response.id;
+        this.$store.dispatch('login', { token, email, role, id });
         this.$router.push('/');
       } catch (error) {
         this.msg = error.response.data.msg;

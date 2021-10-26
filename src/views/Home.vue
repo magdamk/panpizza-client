@@ -1,5 +1,4 @@
 <template>
-cart {{cartItems}} {{payment}}
   <div class="container">
   <br/>
   <div v-if="role==='admin'"><input type="button" class="button is-primary" value="Add menu item" @click="add()" />
@@ -10,7 +9,7 @@ cart {{cartItems}} {{payment}}
             
            
   <br/><br/>
-  <div class="columns">
+  <div class="columns is-multiline">
     <div class="card" v-for="(item,index) in menu.pizza" :key="item._id"  v-show="(role==='admin') || (item.available===true)"> 
       <br/>
       <br/>
@@ -46,14 +45,15 @@ cart {{cartItems}} {{payment}}
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-      <button class="button is-danger" @click="removeFromCart(item._id,item.price)" v-if="isInCart(item._id)"><span>remove from cart</span>
+    <button class="button is-info" @click="addToCart(item)" ><span>add to cart</span> <span class="icon">
+      <i class="fas fa-shopping-cart"></i>
+    </span></button>
+      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span>remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-info" @click="addToCart(item._id,item.price)" ><span>add to cart</span> <span class="icon">
-      <i class="fas fa-shopping-cart"></i>
-    </span></button>
+      
     </div>
   </footer>
    
@@ -62,7 +62,7 @@ cart {{cartItems}} {{payment}}
   </div>
     <h1>NAPOJE</h1>
      <br/><br/>
-   <div class="columns">
+   <div class="columns is-multiline">
      <div class="card" v-for="(item,index) in menu.drink" :key="item._id"  v-show="(role==='admin') || (item.available===true)"> 
       <br/>
       <br/>
@@ -98,14 +98,15 @@ cart {{cartItems}} {{payment}}
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-      <button class="button is-danger" @click="removeFromCart(item._id,item.price)" v-if="isInCart(item._id)"><span>remove from cart</span>
+    <button class="button is-info" @click="addToCart(item)"><span>add to cart</span> <span class="icon">
+      <i class="fas fa-shopping-cart"></i>
+    </span></button>
+      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span>remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
       </button>
-      <button class="button is-info" @click="addToCart(item._id,item.price)"><span>add to cart</span> <span class="icon">
-      <i class="fas fa-shopping-cart"></i>
-    </span></button>
+      
     </div>
   </footer>
    
@@ -141,7 +142,7 @@ export default {
     this.role = this.$store.getters.getRole;
     this.email = this.$store.getters.getUser;
     this.cartItems = this.$store.getters.getCartItems;
-    this.payment = this.$store.getters.total;
+    this.payment = this.$store.getters.getTotal;
     
     await this.getMenu();
   },
@@ -150,16 +151,18 @@ export default {
       this.menu = await MenuService.getAllItems();
       this.menu=this.menu.menu;
     },
-    addToCart(id,price){
-      console.log('id i price', id,price);
-        this.$store.dispatch('addToCart', {id, price});
+    addToCart(item){
+    //  console.log('id i price', id,price);
+      if (!this.$store.getters.isLoggedIn) this.$router.push('/login');
+        this.$store.dispatch('addToCart', item);
     },
-    removeFromCart(id,price){
-        this.$store.dispatch('removeFromCart', {id, price});
+    removeFromCart(item){
+        this.$store.dispatch('removeFromCart', item);
         },
-    isInCart(id){
-            const ans = this.$store.getters.getCartItems;
-            return ans.includes(id);
+    isInCart(item){
+            const ind = this.$store.getters.getCartItems.findIndex(i=>i._id === item._id);
+            if (ind>-1) return true
+            else return false;
         },
     edit(itemID){
       this.$router.push('/edit/'+itemID);
@@ -177,7 +180,7 @@ export default {
     
   }
   .card-content {
-    height: 150px;
+    height: 200px;
   }
   h1{
     font-weight: bold;

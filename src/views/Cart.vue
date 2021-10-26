@@ -1,6 +1,7 @@
 <template>
-cart vue {{cartItems}} total {{payment}}
-  <div id="cart">
+<br/>
+{{msg}}
+  <div id="cart" v-show="!hide">
     <div class="cart--header has-text-centered">
       <i class="fa fa-2x fa-shopping-cart"></i>
     </div>
@@ -10,7 +11,7 @@ cart vue {{cartItems}} total {{payment}}
     <ul>
       <li class="cart-item" v-for="cartItem in cartItems" >
     
-          <CartListItem :item="getItemById(cartItem)"/>
+          <CartListItem :item="cartItem"/>
         
       </li>
       <div class="notification is-success">
@@ -19,14 +20,14 @@ cart vue {{cartItems}} total {{payment}}
           Total Quantity:
           <span class="has-text-weight-bold">{{ $store.getters.cartQuantity }}</span>
           Total Price:
-          <span class="has-text-weight-bold">{{payment}}</span>
+          <span class="has-text-weight-bold">{{$store.getters.getTotal}}</span>
         </p>
       </div>
       <br>
     </ul>
     <div class="buttons">
-    <button :disabled="!cartItems.length" class="button is-info">
-      Checkout (<span class="has-text-weight-bold">{{payment}}</span>)
+    <button :disabled="!cartItems.length" class="button is-info" @click="checkOut()" >
+      Checkout (<span class="has-text-weight-bold">{{$store.getters.getTotal}}</span>)
     </button>
 
  <button class="button is-danger is-outlined" @click="removeAllCartItems()">
@@ -40,6 +41,7 @@ cart vue {{cartItems}} total {{payment}}
 </template>
 <script>
 import MenuService from '@/services/MenuService.js';
+import OrderService from '@/services/OrderService.js';
 import CartListItem from "@/components/CartListItem.vue";
 export default {
   name: "Cart",
@@ -49,7 +51,9 @@ export default {
   data(){
       return {
         payment: this.$store.getters.getTotal,
-        cartItems: this.$store.getters.getCartItems
+        cartItems: this.$store.getters.getCartItems,
+        msg: '',
+        hide: false
       }
   },
   methods: {
@@ -61,6 +65,18 @@ export default {
      
       return result.item[0];
       
+    },
+    async checkOut(){
+      const id = this.$store.getters.getId;
+      const params = {
+        payment: this.$store.getters.getTotal,
+        products: this.$store.getters.getCartItems.map(({_id}) => [_id])
+      }
+      //console.log('checkout ', params.products);
+      const response = await OrderService.addOrder(id,params);
+      this.$store.dispatch('removeAllCartItems');
+      this.msg = response.msg;
+      this.hide = true;
     }
   }
 }

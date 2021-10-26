@@ -1,4 +1,5 @@
 <template>
+<br/>
   <div class="box">
     <div class="cart-item__details">
       <p class="is-inline">
@@ -9,7 +10,13 @@
         <span class="has-text-info has-text-weight-bold">
          PLN {{item.price}}
         </span>
-        
+        <br/>
+         
+      <button class="button is-danger" @click="removeFromCart(item)" ><span>remove from cart</span>
+      <span class="icon">
+      <i class="fas fa-shopping-cart"></i>
+    </span>
+      </button>
       </div>
 
     </div>
@@ -23,6 +30,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+  methods: {
+    
+    removeFromCart(item){
+        this.$store.dispatch('removeFromCart', item);
+        }
   }
 }
 </script>
