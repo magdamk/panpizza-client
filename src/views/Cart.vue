@@ -9,6 +9,7 @@ cart vue {{cartItems}}
     </p>
     <ul>
       <li class="cart-item" v-for="cartItem in cartItems" :key="cartItem">
+  
           <CartListItem :cartItem="cartItem"/>
       </li>
       <div class="notification is-success">
@@ -16,6 +17,8 @@ cart vue {{cartItems}}
         <p>
           Total Quantity:
           <span class="has-text-weight-bold">{{ cartQuantity }}</span>
+          Total Price:
+          <span class="has-text-weight-bold">{{ cartTotal }}</span>
         </p>
       </div>
       <br>
