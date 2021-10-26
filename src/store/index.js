@@ -7,13 +7,8 @@ const getDefaultState = () => {
         token: '',
         email: {},
         role: 'user',
-        cartItems: []
-    };
-};
-
-const resetCart = () => {
-    return {
-        cartItems: []
+        cartItems: [],
+        total: 0
     };
 };
 
@@ -35,13 +30,11 @@ export default createStore({
         getCartItems: state => {
             return state.cartItems
         },
-        cartTotal: state => {
-            return state.cartItems.reduce((acc, cartItem) => {
-                return (cartItem.quantity * cartItem.price) + acc;
-            }, 0).toFixed(2);
-        },
         cartQuantity: state => {
             return state.cartItems.length;
+        },
+        getTotal: state => {
+            return state.total;
         }
     },
     mutations: {
@@ -58,12 +51,16 @@ export default createStore({
             // console.log('store ad to cart echo', item);
             state.cartItems.push(item);
         },
+        REFRESH_TOTAL(state, price) {
+            state.total = state.total + price;
+        },
         REMOVE_FROM_CART(state, item) {
             const ind = state.cartItems.indexOf(item);
             state.cartItems.splice(ind, 1);
         },
         RESET_CART(state) {
             state.cartItems = [];
+            state.total = 0;
         },
         RESET: state => {
             Object.assign(state, getDefaultState());
@@ -80,11 +77,13 @@ export default createStore({
         logout: ({ commit }) => {
             commit('RESET', '');
         },
-        addToCart: ({ commit }, item) => {
-            commit('ADD_TO_CART', item);
+        addToCart: ({ commit, dispatch }, { id, price }) => {
+            commit('ADD_TO_CART', id);
+            commit('REFRESH_TOTAL', price);
         },
-        removeFromCart: ({ commit }, item) => {
-            commit('REMOVE_FROM_CART', item);
+        removeFromCart: ({ commit, dispatch }, { id, price }) => {
+            commit('REMOVE_FROM_CART', id);
+            commit('REFRESH_TOTAL', (-1) * price);
         },
         removeAllCartItems: ({ commit }) => {
             commit('RESET_CART');
