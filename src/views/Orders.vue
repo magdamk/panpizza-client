@@ -61,7 +61,7 @@
             <td>
                 {{order.payment}}
             </td>
-            <td>
+            <td :class="getStatusClass(order.status)">
                 {{order.status}}
             </td>
             <td>
@@ -100,6 +100,7 @@ export default {
       orders: [],
       today: new Date().toISOString().split("T")[0],
       date: new Date().toISOString().split("T")[0],
+      polling: null
       
     };
   },
@@ -107,9 +108,11 @@ export default {
         if (this.$store.getters.getRole !== 'admin') {
         this.$router.push('/');
         };
-        await this.getAllOrders();
+        this.polling = setInterval(this.getAllOrders(),3000)
     },
-    
+    beforeDestroy () {
+	    clearInterval(this.polling)
+    },
     methods: {
         async getAllOrders(){
             const query = "?dateString=" + this.date;
@@ -123,7 +126,23 @@ export default {
         },
         goToOrder(orderId) {
         this.$router.push("/orders/"+orderId);
+        },
+        getStatusClass(status) {
+            if (status==='pending') return "yellow"
+            else if (status==='in progress') return "green"
+            else return ''
         }
     }
 }
 </script>
+<style>
+    .green {
+        background-color: lightgreen;
+    }
+    .red {
+        background-color: red;
+    }
+    .yellow {
+        background-color: yellow;
+    }
+</style>
