@@ -120,6 +120,7 @@
 import AuthService from '@/services/AuthService.js';
 import MenuService from '@/services/MenuService.js';
 export default {
+   name: "Home",
   data() {
     return {
       menu: '',

@@ -9,6 +9,7 @@
 <script>
 import AuthService from '@/services/AuthService.js';
 export default {
+  name: "Logout",
   data() {
     return {
   //    secretMessage: '',

@@ -10,6 +10,7 @@
 <script>
 import AuthService from '@/services/AuthService.js';
 export default {
+  name: "Verify",
   data() {
     return {
       msg: ''

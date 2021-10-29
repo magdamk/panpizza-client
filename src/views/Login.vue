@@ -28,6 +28,7 @@
 <script>
 import AuthService from '@/services/AuthService.js';
 export default {
+  name: "Login",
   data() {
     return {
       email: '',

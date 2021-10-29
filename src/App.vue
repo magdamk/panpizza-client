@@ -20,31 +20,31 @@
   <div id="navbarMenuItems" class="navbar-menu">
    <div class="navbar-start">
    <div class="navbar-item">
-    <router-link to="/" >Menu</router-link>
+ <a>   <router-link to="/" >Menu</router-link></a>
     </div>
      <div class="navbar-item">
-    <router-link to="/about" >About</router-link> 
+<a><router-link to="/about" >About</router-link> </a>
     </div>
-     <div class="navbar-item" v-if="this.$store.getters.getRole==='admin'">
-    <router-link  to="/orders" >Orders</router-link>
+     <div class="navbar-item" >
+   <a> <router-link  to="/orders" v-if="this.$store.getters.getRole==='admin'" >Orders</router-link></a>
     </div>
   </div>
 
   <div class="navbar-end">
    <div class="navbar-item">
-    <router-link v-if="!this.$store.getters.isLoggedIn" to="/sign-up" >SignUp</router-link>
+   <a> <router-link v-if="!this.$store.getters.isLoggedIn" to="/sign-up" >SignUp</router-link></a>
     </div>
      <div class="navbar-item">
-    <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">Login</router-link>
+   <a> <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">Login</router-link></a>
     </div>
      <div class="navbar-item">
-    <router-link v-if="this.$store.getters.isLoggedIn" to="/account">{{$store.getters.getUser}}</router-link>
+  <a>  <router-link v-if="this.$store.getters.isLoggedIn" to="/account">{{$store.getters.getUser}}</router-link></a>
     </div>
      <div class="navbar-item">
-     <router-link v-if="this.$store.getters.isLoggedIn&&this.$store.getters.getRole!=='admin'" to="/cart"> <i class="fas fa-shopping-cart"></i><span v-show="$store.getters.cartQuantity">({{$store.getters.cartQuantity}})</span></router-link>
+     <a><router-link v-if="this.$store.getters.isLoggedIn&&this.$store.getters.getRole!=='admin'" to="/cart"> <i class="fas fa-shopping-cart"></i><span v-show="$store.getters.cartQuantity">({{$store.getters.cartQuantity}})</span></router-link></a>
      </div>
      <div class="navbar-item">
-    <router-link v-if="this.$store.getters.isLoggedIn" to="/logout">Logout</router-link>
+    <a><router-link v-if="this.$store.getters.isLoggedIn" to="/logout">Logout</router-link></a>
     </div>
   </div>
 </div>
@@ -53,11 +53,7 @@
   <router-view/>
 </div>
 </template>
-<script>
-import './../node_modules/bulma/css/bulma.css'
 
-export default {}
-</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

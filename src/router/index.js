@@ -15,18 +15,21 @@ import store from '../store';
 const routes = [{
         path: '/',
         name: 'Home',
-        component: Home
+        component: () =>
+            import ( /* webpackChunkName: "home" */ '../views/Home.vue')
     },
     {
         path: '/edit/:itemID',
         name: 'EditForm',
-        component: EditForm,
+        component: () =>
+            import ( /* webpackChunkName: "editform" */ '../views/EditForm.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/add',
         name: 'AddMenuItem',
-        component: AddMenuItem,
+        component: () =>
+            import ( /* webpackChunkName: "addmenuitem" */ '../views/AddMenuItem.vue'),
         meta: { requiresAuth: true }
     },
     {
@@ -40,47 +43,55 @@ const routes = [{
     },
     {
         path: "/sign-up",
-        name: "sign-up",
-        component: SignUp
+        name: "Sign-up",
+        component: () =>
+            import ( /* webpackChunkName: "signup" */ '../views/SignUp.vue')
     },
     {
         path: "/login",
-        name: "login",
-        component: Login
+        name: "Login",
+        component: () =>
+            import ( /* webpackChunkName: "login" */ '../views/Login.vue')
     },
     {
         path: "/account",
-        name: "account",
-        component: Account,
+        name: "Account",
+        component: () =>
+            import ( /* webpackChunkName: "account" */ '../views/Account.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: "/cart",
-        name: "cart",
-        component: Cart,
+        name: "Cart",
+        component: () =>
+            import ( /* webpackChunkName: "cart" */ '../views/Cart.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: "/logout",
-        name: "logout",
-        component: Logout,
+        name: "Logout",
+        component: () =>
+            import ( /* webpackChunkName: "logout" */ '../views/Logout.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: "/verify/:userID/:token",
-        name: "verify",
-        component: Verify
+        name: "Verify",
+        component: () =>
+            import ( /* webpackChunkName: "verify" */ '../views/Verify.vue')
     },
     {
         path: "/orders",
         name: "Orders",
-        component: Orders,
+        component: () =>
+            import ( /* webpackChunkName: "orders" */ '../views/Orders.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: "/orders/:orderID",
         name: "Order",
-        component: Order,
+        component: () =>
+            import ( /* webpackChunkName: "order" */ '../views/Order.vue'),
         meta: { requiresAuth: true }
     },
     {
