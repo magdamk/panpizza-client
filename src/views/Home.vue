@@ -5,7 +5,10 @@
   
   </div>
   <br/>
-  <h1>PIZZA</h1>
+  <h1>
+  <img src="../assets/img/pizza.svg" width="28" height="28" style="padding:4px"/>
+  PAN*PIZZA
+  <img src="../assets/img/pizza.svg" width="28" height="28" style="padding:4px"/></h1>
             
            
   <br/><br/>
@@ -60,7 +63,11 @@
     <br/><br/><br/>
   </div>
   </div>
-    <h1>DRINKS</h1>
+    <h1>
+    <img src="../assets/img/bottle.jpg" width="28" height="28" style="padding:4px"/>
+    PAN*DRINKS
+    <img src="../assets/img/bottle.jpg" width="28" height="28" style="padding:4px"/>
+    </h1>
      <br/><br/>
    <div class="columns is-multiline">
      <div class="card" v-for="(item,index) in menu.drink" :key="item._id"  v-show="(role==='admin') || (item.available===true)"> 
