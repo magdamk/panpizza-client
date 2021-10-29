@@ -1,22 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import SignUp from "../views/SignUp.vue";
-import Login from "../views/Login.vue";
-import Logout from "../views/Logout.vue";
-import Verify from "../views/Verify.vue";
-import Account from "../views/Account.vue";
-import EditForm from "../views/EditForm.vue";
-import AddMenuItem from "../views/AddMenuItem.vue";
-import Orders from "../views/Orders.vue";
-import Order from "../views/Order.vue";
-import Cart from "../views/Cart.vue";
+import Home from '../views/Home.vue';
 import store from '../store';
 
 const routes = [{
         path: '/',
         name: 'Home',
-        component: () =>
-            import ( /* webpackChunkName: "home" */ '../views/Home.vue')
+        component: Home
     },
     {
         path: '/edit/:itemID',

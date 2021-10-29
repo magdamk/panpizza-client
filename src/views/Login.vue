@@ -36,6 +36,11 @@ export default {
       msg: ''
     };
   },
+  mounted()  {
+        if (this.$store.getters.isLoggedIn) {
+        this.$router.push('/');
+        };
+    },
   methods: {
     async login() {
       try {

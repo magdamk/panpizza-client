@@ -21,7 +21,7 @@
       <div class="select">
        <select type="text" id="type" v-model.trim="type">
           <option value="pizza">PIZZA</option>
-          <option value="drink">NAPOJE</option>
+          <option value="drink">DRINKS</option>
         </select>
       </div>
       <div class="field">

@@ -60,7 +60,7 @@
     <br/><br/><br/>
   </div>
   </div>
-    <h1>NAPOJE</h1>
+    <h1>DRINKS</h1>
      <br/><br/>
    <div class="columns is-multiline">
      <div class="card" v-for="(item,index) in menu.drink" :key="item._id"  v-show="(role==='admin') || (item.available===true)"> 
