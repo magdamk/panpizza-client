@@ -1,11 +1,11 @@
 <template>
 
-  <nav class="navbar is-mobile is-success" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-mobile is-success"  role="navigation" aria-label="main navigation">
 
 <div class="navbar-brand">
-    <p class="navbar-item" >
-      <img src="../src/assets/img/pepperoni1.png" width="28" height="28">
-      PAN*PIZZA
+    <p class="navbar-item" style="color:white;">
+      <img style="fill:white;" src="../src/assets/img/pizzayellow.svg" width="28" height="28"/>
+       PAN*PIZZA
     </p>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenuItems">
@@ -17,35 +17,35 @@
     </a>
   </div>
 
-  <div id="navbarMenuItems" class="navbar-menu is-mobile">
-   <div class="navbar-start is-mobile">
-   <div class="navbar-item is-mobile">
+  <div id="navbarMenuItems" class="navbar-menu">
+   <div class="navbar-start">
+   <a class="navbar-item">
       <router-link to="/" >Menu</router-link>
-    </div>
-     <div class="navbar-item">
+    </a>
+     <a class="navbar-item">
 <router-link to="/about" >About</router-link> 
-    </div>
-     <div class="navbar-item" >
+    </a>
+     <a class="navbar-item" >
    <router-link  to="/orders" v-if="this.$store.getters.getRole==='admin'" >Orders</router-link>
-    </div>
+    </a>
   </div>
 
-  <div class="navbar-end is-mobile">
-   <div class="navbar-item is-mobile">
+  <div class="navbar-end">
+   <a class="navbar-item">
    <router-link v-if="!this.$store.getters.isLoggedIn" to="/sign-up" >SignUp</router-link>
-    </div>
-     <div class="navbar-item is-mobile">
+    </a>
+     <a class="navbar-item">
    <router-link v-if="!this.$store.getters.isLoggedIn" to="/login">Login</router-link>
-    </div>
-     <div class="navbar-item is-mobile">
+    </a>
+     <a class="navbar-item">
   <router-link v-if="this.$store.getters.isLoggedIn" to="/account">{{$store.getters.getUser}}</router-link>
-    </div>
-     <div class="navbar-item is-mobile">
+    </a>
+     <a class="navbar-item">
    <router-link v-if="this.$store.getters.isLoggedIn&&this.$store.getters.getRole!=='admin'" to="/cart"> <i class="fas fa-shopping-cart"></i><span v-show="$store.getters.cartQuantity">({{$store.getters.cartQuantity}})</span></router-link>
-     </div>
-     <div class="navbar-item is-mobile">
+     </a>
+     <a class="navbar-item">
     <router-link v-if="this.$store.getters.isLoggedIn" to="/logout">Logout</router-link>
-    </div>
+    </a>
   </div>
 </div>
   </nav>
@@ -64,6 +64,7 @@
 
 #nav {
   padding: 30px;
+  color: white;
 }
 
 #nav a {
@@ -74,4 +75,5 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>
