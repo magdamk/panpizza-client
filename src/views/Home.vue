@@ -45,10 +45,10 @@
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-    <button class="button is-info" @click="addToCart(item)" ><span>add to cart</span> <span class="icon">
+    <button class="button is-info" @click="addToCart(item)" ><span style="width:124px;">add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
-      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span>remove from cart</span>
+      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span style="width:124px;">remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
@@ -98,10 +98,10 @@
   <footer class="card-footer">
     <div v-if="role==='admin'"><input class="button is-warning" type="button" value="Edit" @click="edit(item._id)" /></div>
     <div v-if="role!=='admin'">
-    <button class="button is-info" @click="addToCart(item)"><span>add to cart</span> <span class="icon">
+    <button class="button is-info" @click="addToCart(item)"><span style="width:124px;">add to cart</span> <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span></button>
-      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span>remove from cart</span>
+      <button class="button is-danger" @click="removeFromCart(item)" v-if="isInCart(item)"><span style="width:124px;">remove from cart</span>
       <span class="icon">
       <i class="fas fa-shopping-cart"></i>
     </span>
@@ -154,8 +154,8 @@ export default {
     },
     addToCart(item){
     //  console.log('id i price', id,price);
-      if (!this.$store.getters.isLoggedIn) this.$router.push('/login');
-        this.$store.dispatch('addToCart', item);
+      if (!this.$store.getters.isLoggedIn) this.$router.push('/login')
+      else  this.$store.dispatch('addToCart', item);
     },
     removeFromCart(item){
         this.$store.dispatch('removeFromCart', item);
