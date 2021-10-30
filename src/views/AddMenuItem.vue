@@ -15,9 +15,10 @@
         <input class="input"  type="text" id="description" v-model.trim="description" />
       </div>
       <div class="field">
-         <label class="label" for="photo">Photo</label>
+         <label class="label" for="photo">Photo </label>
          <input class="input" type="file" accept="image/png, image/jpeg" id="photo" @change="photoChange()"/>
       <img v-if="photo" :src="require(`@/assets/img/${photo}`)"  style="height:50px;border:2px solid black; padding: 2px">
+      {{photo}}
       </div>
       <div class="select">
        <select type="text" id="type" v-model.trim="type">
