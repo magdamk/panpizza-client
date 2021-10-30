@@ -88,7 +88,7 @@
    
    <div class="card-image">
     <figure class="image is-4by4">
-      <img v-bind:alt="`photo of drink ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:100px" />
+      <img v-bind:alt="`photo of drink ${item.name}`" v-bind:src="require(`@/assets/img/${item.photo}`)" style="width:50px" />
     </figure>
   </div>
 

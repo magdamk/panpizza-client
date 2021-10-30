@@ -15,8 +15,11 @@
         <input class="input"  type="text" id="description" v-model.trim="description" />
       </div>
       <div class="field">
-         <label class="label" for="photo">Photo</label>
-        <input class="input" type="text" id="photo" v-model.trim="photo"/>
+       <label class="label" for="photo">Photo</label>
+        <img :src="require(`@/assets/img/${photo}`)"  style="height:50px;border:2px solid black; padding: 2px">
+       
+        <input class="input" type="file" accept="image/png, image/jpeg" id="photo" @change="photoChange()"/>
+       
       </div>
       <div class="select">
        <select type="text" id="type" v-model.trim="type">
@@ -115,6 +118,7 @@ async created() {
         const params ={};
         if (this.name != this.item.name) params.name = this.name;
         if (this.description != this.item.description) params.description = this.description;
+        console.log('photo ', this.photo);
         if (this.photo != this.item.photo) params.photo = this.photo;
         if (this.type != this.item.type) params.type = this.type;
         if (this.position != this.item.position) params.position = this.position;
@@ -139,6 +143,9 @@ async created() {
     },
     goBack(){
          this.$router.push('/');
+    },
+    photoChange(){
+      this.photo = document.getElementById('photo').value.slice(12);
     }
    
 }

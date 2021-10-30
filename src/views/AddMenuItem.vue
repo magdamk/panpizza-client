@@ -16,7 +16,8 @@
       </div>
       <div class="field">
          <label class="label" for="photo">Photo</label>
-        <input class="input" type="text" id="photo" v-model.trim="photo"/>
+         <input class="input" type="file" accept="image/png, image/jpeg" id="photo" @change="photoChange()"/>
+      <img v-if="photo" :src="require(`@/assets/img/${photo}`)"  style="height:50px;border:2px solid black; padding: 2px">
       </div>
       <div class="select">
        <select type="text" id="type" v-model.trim="type">
@@ -102,6 +103,9 @@ async created() {
     },
     goBack(){
          this.$router.push('/');
+    },
+    photoChange(){
+      this.photo = document.getElementById('photo').value.slice(12);
     }
    
 }
