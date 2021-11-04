@@ -8,6 +8,7 @@ const getDefaultState = () => {
         email: {},
         role: 'user',
         id: '',
+        phone: '',
         cartItems: [],
         total: 0
     };
@@ -30,6 +31,9 @@ export default createStore({
         },
         getId: state => {
             return state.id;
+        },
+        getPhone: state => {
+            return state.phone;
         },
         getCartItems: state => {
             return state.cartItems
@@ -54,6 +58,9 @@ export default createStore({
         SET_ID: (state, id) => {
             state.id = id;
         },
+        SET_PHONE: (state, phone) => {
+            state.phone = phone;
+        },
         ADD_TO_CART(state, item) {
             // console.log('store ad to cart echo', item);
             state.cartItems.push(item);
@@ -74,11 +81,12 @@ export default createStore({
         }
     },
     actions: {
-        login: ({ commit, dispatch }, { token, email, role, id }) => {
+        login: ({ commit, dispatch }, { token, email, role, id, phone }) => {
             commit('SET_TOKEN', token);
             commit('SET_USER', email);
             commit('SET_ROLE', role);
             commit('SET_ID', id);
+            commit('SET_PHONE', phone);
             // set auth header
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         },

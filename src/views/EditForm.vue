@@ -17,7 +17,7 @@
       <div class="field">
        <label class="label" for="photo">Photo</label>
         <img :src="require(`@/assets/img/${photo}`)"  style="height:50px;border:2px solid black; padding: 2px">
-       
+       {{photo}}
         <input class="input" type="file" accept="image/png, image/jpeg" id="photo" @change="photoChange()"/>
        
       </div>
@@ -145,7 +145,9 @@ async created() {
          this.$router.push('/');
     },
     photoChange(){
-      this.photo = document.getElementById('photo').value.slice(12);
+      const path = document.getElementById('photo').value;
+      const ind = path.lastIndexOf('\\');
+      this.photo = path.slice(ind+1);
     }
    
 }

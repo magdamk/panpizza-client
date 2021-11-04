@@ -1,5 +1,6 @@
 <template>
 <br/>
+{{alert}}
 {{msg}}
   <div id="cart" v-show="!hide">
     <div class="cart--header has-text-centered">
@@ -51,8 +52,10 @@ export default {
       return {
         payment: this.$store.getters.getTotal,
         cartItems: this.$store.getters.getCartItems,
+        phone: this.$store.getters.getPhone,
         msg: '',
-        hide: false
+        hide: false,
+        alert: ''
       }
   },
   methods: {
@@ -62,6 +65,7 @@ export default {
     },
     async checkOut(){
       const id = this.$store.getters.getId;
+      if (this.phone){
       const params = {
         payment: this.$store.getters.getTotal,
         products: this.$store.getters.getCartItems.map(({_id}) => [_id])
@@ -71,7 +75,9 @@ export default {
       this.$store.dispatch('removeAllCartItems');
       this.msg = response.msg;
       this.hide = true;
-    }
+    }else { this.alert = "Please enter your phone and address before making an order! Click on your mail on the menu stripe to enter your account.";
+    } 
   }
+}
 }
 </script>
