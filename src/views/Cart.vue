@@ -70,7 +70,6 @@ export default {
         payment: this.$store.getters.getTotal,
         products: this.$store.getters.getCartItems.map(({_id}) => [_id])
       }
-      //console.log('checkout ', params.products);
       const response = await OrderService.addOrder(id,params);
       this.$store.dispatch('removeAllCartItems');
       this.msg = response.msg;
